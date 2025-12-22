@@ -256,6 +256,7 @@ module Heysender
       request['Authorization'] = "Basic #{credentials}"
       request['Content-Type'] = 'application/json'
       request['Accept'] = 'application/json'
+      request['User-Agent'] = 'HS-ruby-sdk/0.9'
 
       # Set body for POST and PUT requests
       request.body = body.to_json if body && %i[post put].include?(method)
