@@ -218,7 +218,7 @@ module Heysender
     # @param email [String] Email address to remove
     # @return [Hash] Response data
     def remove_bounce(domain, email)
-      request(:delete, "/api/suppressions/#{domain}/bounces/#{email}")
+      request(:delete, "/api/suppressions/#{domain}/bounce/#{email}")
     end
 
     private
