@@ -70,6 +70,14 @@ module Heysender
       request(:get, "/api/domains/#{domain}/validate")
     end
 
+    # Get a single domain
+    #
+    # @param domain [String] Domain name
+    # @return [Hash] Domain data
+    def get_domain(domain)
+      request(:get, "/api/domains/#{domain}")
+    end
+
     # ==================== SMTP USER METHODS ====================
 
     # Get SMTP users for a domain
@@ -78,6 +86,15 @@ module Heysender
     # @return [Array<Hash>] List of SMTP users
     def get_smtp_users(domain_id)
       request(:get, "/api/smtp/#{domain_id}")
+    end
+
+    # Get a single SMTP user
+    #
+    # @param domain_id [Integer] Domain ID
+    # @param user_id [Integer] SMTP user ID
+    # @return [Hash] SMTP user data, including a nested "domain" object
+    def get_smtp_user(domain_id, user_id)
+      request(:get, "/api/smtp/#{domain_id}/#{user_id}")
     end
 
     # Create SMTP user
@@ -256,7 +273,7 @@ module Heysender
       request['Authorization'] = "Basic #{credentials}"
       request['Content-Type'] = 'application/json'
       request['Accept'] = 'application/json'
-      request['User-Agent'] = 'HS-ruby-sdk/0.9'
+      request['User-Agent'] = 'HS-ruby-sdk/0.9.1'
 
       # Set body for POST and PUT requests
       request.body = body.to_json if body && %i[post put].include?(method)
